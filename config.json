@@ -1,0 +1,644 @@
+{
+ "dependencies": [],
+ "environment": [
+  {
+   "name": "TOKEN",
+   "description": "The API TOKEN"
+  }
+ ],
+ "endpoints": [],
+ "schema": {
+  "imports": [],
+  "types": [
+   {
+    "name": "Root",
+    "fields": [
+     {
+      "name": "deployments",
+      "type": "DeploymentCollection"
+     },
+     {
+      "name": "teams",
+      "type": "TeamCollection"
+     },
+     {
+      "name": "aliases",
+      "type": "AliasCollection"
+     },
+     {
+      "name": "domains",
+      "type": "DomainCollection"
+     },
+     {
+      "name": "certificates",
+      "type": "CertificateCollection"
+     },
+     {
+      "name": "dns",
+      "type": "DnsCollection"
+     }
+    ],
+    "computedFields": [],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "DeploymentCollection",
+    "fields": [],
+    "computedFields": [
+     {
+      "name": "one",
+      "type": "Deployment",
+      "params": [
+       {
+        "name": "uid",
+        "type": "String"
+       }
+      ]
+     },
+     {
+      "name": "items",
+      "type": "List",
+      "ofType": {
+       "type": "DeploymentItem"
+      }
+     }
+    ],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "DeploymentItem",
+    "fields": [
+     {
+      "name": "uid",
+      "type": "String"
+     }
+    ],
+    "computedFields": [
+     {
+      "name": "self",
+      "type": "Ref",
+      "ofType": {
+       "type": "DeploymentItem"
+      }
+     }
+    ],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "Deployment",
+    "fields": [
+     {
+      "name": "uid",
+      "type": "String"
+     },
+     {
+      "name": "host",
+      "type": "String"
+     },
+     {
+      "name": "state",
+      "type": "String"
+     },
+     {
+      "name": "stateTs",
+      "type": "String"
+     },
+     {
+      "name": "scale",
+      "type": "ScaleConfiguration"
+     }
+    ],
+    "computedFields": [
+     {
+      "name": "self",
+      "type": "Ref",
+      "ofType": {
+       "type": "Deployment"
+      }
+     },
+     {
+      "name": "aliases",
+      "type": "List",
+      "ofType": {
+       "type": "Alias"
+      }
+     }
+    ],
+    "actions": [
+     {
+      "name": "setScaleConfiguration",
+      "type": "Int",
+      "params": [
+       {
+        "name": "min",
+        "type": "Int"
+       },
+       {
+        "name": "max",
+        "type": "Int"
+       }
+      ]
+     },
+     {
+      "name": "setAlias",
+      "type": "Int",
+      "params": [
+       {
+        "name": "alias",
+        "type": "String"
+       }
+      ]
+     }
+    ],
+    "events": []
+   },
+   {
+    "name": "ScaleConfiguration",
+    "fields": [
+     {
+      "name": "current",
+      "type": "Int"
+     },
+     {
+      "name": "min",
+      "type": "Int"
+     },
+     {
+      "name": "max",
+      "type": "Int"
+     }
+    ],
+    "computedFields": [],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "AliasCollection",
+    "fields": [],
+    "computedFields": [
+     {
+      "name": "one",
+      "type": "Alias",
+      "params": [
+       {
+        "name": "uid",
+        "type": "String"
+       }
+      ]
+     },
+     {
+      "name": "items",
+      "type": "List",
+      "ofType": {
+       "type": "Alias"
+      }
+     }
+    ],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "Alias",
+    "fields": [
+     {
+      "name": "uid",
+      "type": "String"
+     },
+     {
+      "name": "alias",
+      "type": "String"
+     },
+     {
+      "name": "created",
+      "type": "String"
+     },
+     {
+      "name": "deploymentId",
+      "type": "String"
+     }
+    ],
+    "computedFields": [
+     {
+      "name": "self",
+      "type": "Ref",
+      "ofType": {
+       "type": "Alias"
+      }
+     }
+    ],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "TeamCollection",
+    "fields": [],
+    "computedFields": [
+     {
+      "name": "one",
+      "type": "Team",
+      "params": [
+       {
+        "name": "id",
+        "type": "String"
+       }
+      ]
+     },
+     {
+      "name": "items",
+      "type": "List",
+      "ofType": {
+       "type": "Team"
+      }
+     }
+    ],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "Team",
+    "fields": [
+     {
+      "name": "id",
+      "type": "String"
+     },
+     {
+      "name": "slug",
+      "type": "String"
+     },
+     {
+      "name": "name",
+      "type": "String"
+     },
+     {
+      "name": "creatorId",
+      "type": "String"
+     },
+     {
+      "name": "avatar",
+      "type": "String"
+     }
+    ],
+    "computedFields": [
+     {
+      "name": "self",
+      "type": "Ref",
+      "ofType": {
+       "type": "Team"
+      }
+     },
+     {
+      "name": "deployments",
+      "type": "DeploymentCollection"
+     }
+    ],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "DomainCollection",
+    "fields": [],
+    "computedFields": [
+     {
+      "name": "one",
+      "type": "Domain",
+      "params": [
+       {
+        "name": "uid",
+        "type": "String"
+       }
+      ]
+     },
+     {
+      "name": "items",
+      "type": "List",
+      "ofType": {
+       "type": "Domain"
+      }
+     }
+    ],
+    "actions": [
+     {
+      "name": "createDomain",
+      "type": "Int",
+      "params": [
+       {
+        "name": "name",
+        "type": "String"
+       },
+       {
+        "name": "isExternal",
+        "type": "Boolean"
+       }
+      ]
+     },
+     {
+      "name": "checkDomain",
+      "type": "Int",
+      "params": [
+       {
+        "name": "name",
+        "type": "String"
+       }
+      ]
+     },
+     {
+      "name": "deleteDomain",
+      "type": "Int",
+      "params": [
+       {
+        "name": "name",
+        "type": "String"
+       }
+      ]
+     }
+    ],
+    "events": []
+   },
+   {
+    "name": "Domain",
+    "fields": [
+     {
+      "name": "uid",
+      "type": "String"
+     },
+     {
+      "name": "name",
+      "type": "String"
+     },
+     {
+      "name": "created",
+      "type": "String"
+     },
+     {
+      "name": "boughtAt",
+      "type": "String"
+     },
+     {
+      "name": "expiresAt",
+      "type": "String"
+     },
+     {
+      "name": "isExternal",
+      "type": "Boolean"
+     },
+     {
+      "name": "verified",
+      "type": "Boolean"
+     },
+     {
+      "name": "aliases",
+      "type": "List",
+      "ofType": {
+       "type": "String"
+      }
+     },
+     {
+      "name": "certs",
+      "type": "List",
+      "ofType": {
+       "type": "String"
+      }
+     }
+    ],
+    "computedFields": [
+     {
+      "name": "self",
+      "type": "Ref",
+      "ofType": {
+       "type": "Domain"
+      }
+     },
+     {
+      "name": "dns",
+      "type": "List",
+      "ofType": {
+       "type": "Dns"
+      }
+     }
+    ],
+    "actions": [
+     {
+      "name": "createDns",
+      "type": "Int",
+      "params": [
+       {
+        "name": "name",
+        "type": "String"
+       },
+       {
+        "name": "type",
+        "type": "String"
+       },
+       {
+        "name": "value",
+        "type": "String"
+       }
+      ]
+     },
+     {
+      "name": "deleteDns",
+      "type": "Int",
+      "params": [
+       {
+        "name": "id",
+        "type": "String"
+       }
+      ]
+     }
+    ],
+    "events": []
+   },
+   {
+    "name": "DnsCollection",
+    "fields": [],
+    "computedFields": [
+     {
+      "name": "one",
+      "type": "Dns",
+      "params": [
+       {
+        "name": "uid",
+        "type": "String"
+       }
+      ]
+     },
+     {
+      "name": "items",
+      "type": "List",
+      "ofType": {
+       "type": "Dns"
+      }
+     }
+    ],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "Dns",
+    "fields": [
+     {
+      "name": "id",
+      "type": "String"
+     },
+     {
+      "name": "slug",
+      "type": "String"
+     },
+     {
+      "name": "type",
+      "type": "String"
+     },
+     {
+      "name": "name",
+      "type": "String"
+     },
+     {
+      "name": "value",
+      "type": "String"
+     },
+     {
+      "name": "created",
+      "type": "String"
+     },
+     {
+      "name": "updated",
+      "type": "String"
+     }
+    ],
+    "computedFields": [
+     {
+      "name": "self",
+      "type": "Ref",
+      "ofType": {
+       "type": "Dns"
+      }
+     }
+    ],
+    "actions": [],
+    "events": []
+   },
+   {
+    "name": "CertificateCollection",
+    "fields": [],
+    "computedFields": [
+     {
+      "name": "one",
+      "type": "Certificate",
+      "params": [
+       {
+        "name": "cn",
+        "type": "String"
+       }
+      ]
+     },
+     {
+      "name": "items",
+      "type": "List",
+      "ofType": {
+       "type": "Certificate"
+      }
+     }
+    ],
+    "actions": [
+     {
+      "name": "createCertificate",
+      "type": "Int",
+      "params": [
+       {
+        "name": "domains",
+        "type": "List",
+        "ofType": {
+         "type": "String"
+        }
+       },
+       {
+        "name": "renew",
+        "type": "Boolean"
+       }
+      ]
+     },
+     {
+      "name": "replaceCertificate",
+      "type": "Int",
+      "params": [
+       {
+        "name": "domains",
+        "type": "List",
+        "ofType": {
+         "type": "String"
+        }
+       },
+       {
+        "name": "ca",
+        "type": "String"
+       },
+       {
+        "name": "cert",
+        "type": "String"
+       },
+       {
+        "name": "key",
+        "type": "String"
+       }
+      ]
+     }
+    ],
+    "events": []
+   },
+   {
+    "name": "Certificate",
+    "fields": [
+     {
+      "name": "uid",
+      "type": "String"
+     },
+     {
+      "name": "cn",
+      "type": "String"
+     },
+     {
+      "name": "created",
+      "type": "String"
+     },
+     {
+      "name": "expiration",
+      "type": "String"
+     },
+     {
+      "name": "autoRenew",
+      "type": "String"
+     }
+    ],
+    "computedFields": [
+     {
+      "name": "self",
+      "type": "Ref",
+      "ofType": {
+       "type": "Certificate"
+      }
+     }
+    ],
+    "actions": [],
+    "events": []
+   }
+  ]
+ },
+ "expressions": [
+  {
+   "name": "url",
+   "pattern": "^[a-zA-Z0-9-]+.now.sh$",
+   "description": ""
+  }
+ ],
+ "database": [],
+ "tests": [
+  {
+   "name": "access",
+   "description": "The driver can access the Zeit API and retrieve data"
+  }
+ ],
+ "isDriver": false
+}

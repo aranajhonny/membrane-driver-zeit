@@ -1,0 +1,9 @@
+{
+  "name": "zeit",
+  "version": "1.0.0",
+  "description": "Zeit driver for Membrane",
+  "dependencies": {
+    "axios": "^0.17.1"
+  },
+  "license": "MIT"
+}
